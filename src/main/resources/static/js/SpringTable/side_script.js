@@ -20,3 +20,4 @@ function side_button(){
     lineThree.classList.toggle('line-cross');
     link.classList.toggle('fade-in');
 }
+
