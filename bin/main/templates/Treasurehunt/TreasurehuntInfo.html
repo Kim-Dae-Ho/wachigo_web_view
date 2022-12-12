@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>왕인박사관리사이트 | 이용정보</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <!--    로딩CSS-->
+    <link rel="stylesheet" href="/dist/css/loadscene.css">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- Navbar -->
+    <div th:insert="common/navbar.html"></div>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <div th:insert="common/mainsidbar.html"></div>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>보물찾기 이용정보</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">대시보드</a></li>
+                            <li class="breadcrumb-item active">보물찾기 이용정보</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title"></h3>
+                                <div class="input-group input-group-sm card-title mr-3" style="width: 10%;">
+                                    <select class="form-control form-control-sm"
+                                            name="selectKey" id="selectKey">
+                                        <option selected="selected">전체</option>
+                                        <option value="완료됨">완료됨</option>
+                                        <option value="진행중">진행중</option>
+                                    </select>
+                                </div>
+                                <div class="input-group input-group-sm card-title" style="width: 20%;">
+                                    <input type="search" class="form-control form-control-sm"
+                                           placeholder="검색어를 입력하세요" id="titleText" name="titleText" onkeyup="enterkey()">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-sm btn-default" onclick="searching()">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover text-nowrap">
+                                    <thead>
+                                    <tr>
+                                        <th style="text-align:center;">No</th>
+                                        <th style="text-align:center;">사용자 아이디</th>
+                                        <th style="text-align:center;">상태</th>
+                                        <th style="text-align:center;">보물찾기 진행여부</th>
+                                        <th style="text-align:center;">시작날짜</th>
+                                        <th style="text-align:center;">종료날짜</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="treasurehunt_list">
+                                    <tr th:if="${treasurehunt_list}!=null" th:each="Co : ${treasurehunt_list}" style="text-align:center;">
+
+                                        <td style="text-align:center;"><span th:if="${Co.tipk}!= null" th:text="${Co.tipk}" id="tipk"></span></td>
+
+                                        <td style="text-align:center;"><span th:if="${Co.tiuserid}!= null" th:text="${Co.tiuserid}"
+                                                  id="tiuserid"></span></td>
+
+                                        <td style="text-align:center;" th:if="${Co.tistate}!= null and ${Co.tistate} == 완료됨">
+                                            <i class="fas fa-flag"></i>
+                                        </td>
+
+                                        <td style="text-align:center;" th:if="${Co.tistate}!= null and ${Co.tistate} == 진행중">
+                                            <i class="fas fa-running"></i>
+                                        </td>
+
+
+                                        <td style="text-align:center;" th:if="${Co.tistate}!= null and ${Co.tistate} == 완료됨">
+                                            <span th:text="완료됨"></span>
+                                        </td>
+
+                                        <td style="text-align:center;" th:if="${Co.tistate}!= null and ${Co.tistate} == 진행중">
+                                            <span th:text="진행중"></span>
+                                        </td>
+
+                                        <td style="text-align:center;" th:if="${Co.tistartdatetime}!= null"><span
+                                                th:text="${#temporals.format(Co.tistartdatetime, 'yyyy-MM-dd HH:mm:ss')}"
+                                                id="tistartdatetime"></span></td>
+
+                                        <td style="text-align:center;" th:if="${Co.tienddatetime}!= null"><span
+                                                th:text="${#temporals.format(Co.tienddatetime, 'yyyy-MM-dd HH:mm:ss')}"
+                                                id="tienddatetime"></span></td>
+                                        <td style="text-align:center;" th:if="${Co.tienddatetime}== null"><span
+                                                th:text="''"
+                                                id="tienddatetime"></span></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer clearfix">
+                                    <ul class="pagination pagination-sm m-0 justify-content-center" id="pageList">
+
+
+                                        <li class="page-item">
+                                            <a class="page-link" aria-label="Previous"
+                                               th:onclick="|javascript:paging(0)|"><span>처음</span></a>
+                                        </li>
+
+                                        <li class="page-item prev-page" th:if="${isPrevSection}"
+
+                                            th:value="${thisSection}">
+                                            <a class="page-link" aria-label="Previous"
+                                               th:onclick="|javascript:paging(${firstBtnIndex}-1)|">이전</a>
+                                        </li>
+
+                                        <!--            <li th:each="page: ${#numbers.sequence(0,9)}" th:id="pageItem+${page}" class="page-item" th:classappend="${thisPage} ==  ${page} ?  'active'"><a class="page-link" th:href="@{/testDB(page=${page})}"><span th:text="${page+1}"></span></a></li>-->
+
+                                        <!--            onclick 구현-->
+                                        <li th:each="page: ${#numbers.sequence(firstBtnIndex,lastBtnIndex)}"
+                                            id="pageItem" class="page-item"
+                                            th:classappend="${thisPage} ==  ${page} ?  'active'" th:value="${page}"><a
+                                                class="page-link" th:onclick="|javascript:paging(${page})|"><span
+                                                th:text="${page+1}"></span></a></li>
+                                        <!--            onclick 구현-->
+
+
+                                        <!--다음버튼2-->
+                                        <li class="page-item next-page" th:if="${isNextSection}"
+                                            th:onclick="|javascript:paging(${lastBtnIndex}+1)|"
+                                            th:value="${thisSection}">
+                                            <a class="page-link" aria-label="Next">
+                                                <span aria-hidden="true">다음</span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </li>
+                                        <!--다음버튼2-->
+
+
+                                        <li class="page-item">
+                                            <a class="page-link" id="pageItem2"
+                                               th:onclick="|javascript:paging(${totalPage})|"
+                                               aria-label="Previous">끝</a>
+                                        </li>
+                                    </ul>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- Main Footer -->
+    <div th:insert="common/footer.html"></div>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+<div id="load"><img src="/dist/img/spinner.gif" alt="loading"></div>
+
+<!-- jQuery -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/dist/js/adminlte.min.js"></script>
+
+<script src="/js/Treasurehunt/TreasurehuntInfo.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript">
+    window.onbeforeunload = function () {
+        $('#load').show();
+    }
+    $(window).on('load', function () {
+        $("#load").hide();
+    });
+    window.onpageshow = function(event) {
+        if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+            $('#load').hide();
+        }
+    }
+</script>
+</body>
+</html>

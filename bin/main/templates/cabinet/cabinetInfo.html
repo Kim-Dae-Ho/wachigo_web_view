@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>왕인박사관리사이트 | 보물찾기 위치정보</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <!--    로딩CSS-->
+    <link rel="stylesheet" href="/dist/css/loadscene.css">
+    <style>
+        .red_box{
+            background-color: #32a345;
+            padding: 10px;
+            font-weight: 900;
+            color: white;
+            width: auto;
+            border-radius: 5px;
+            margin: auto;
+            border: 1px solid black;
+        }
+        .blue_box{
+            background-color: #ff4d4d;
+            padding: 10px;
+            font-weight: 900;
+            color: white;
+            width: auto;
+            border-radius: 5px;
+            margin: auto;
+            border: 1px solid black;
+        }
+        .red_box p{
+            text-align: left;
+            margin: 0px;
+        }
+        .blue_box p{
+            text-align: left;
+            margin: 0px;
+        }
+        .red_box h3{
+            text-align: right;
+            font-size: 14px;
+        }
+        .blue_box h3{
+            text-align: right;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- Navbar -->
+    <div th:insert="common/navbar.html"></div>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <div th:insert="common/mainsidbar.html"></div>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>선물함 상태</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">대시보드</a></li>
+                            <li class="breadcrumb-item active">선물함 상태</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">캐비넷 번호: 001</h3>
+<!--                                <div class="card-tools">-->
+<!--                                    <div class="red_box" style="width:120px; padding:10px; border-radius:3px, margin:auto; border: 2px solid black; text-align:center;"><span style="color:black">선물함 문 닫힘</span></div>-->
+<!--                                </div>-->
+<!--                                <div class="card-tools" style="margin-right:1%;">-->
+<!--                                    <div class="blue_box" style="width:120px; padding:10px; border-radius:3px, margin:auto; border: 2px solid black; text-align:center;"><span style="color:black">선물함 문 열림</span></div>-->
+<!--                                </div>-->
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover text-nowrap">
+                                    <tbody id="cabinet_goods_info">
+                                    <tr>
+                                        <td style="text-align:center;">
+                                            <div th:id="cabinet1"
+                                                 th:class="${cabinet1}==0 ? 'red_box' : 'blue_box'">
+                                                <p>1번</p>
+                                                <h3 th:text="${cabinet1}==0 ? '문 닫힘' : '문 열림'"></h3>
+                                                <h3 th:text="${isgoods1}==0 ? '상품 없음' : '상품 있음'" th:style="${isgoods1}==0 ? 'color:black;' : 'color:white;'"></h3>
+                                                <hr style="margin-top:3px; margin-bottom:3px;">
+                                                <p style="text-align:right;">
+                                                    <a onclick="setInsertGoods(1);" style="cursor: pointer;"><i class="fas fa-plus-square"></i></a>
+                                                    <a onclick="setDeleteGoods(1);" style="cursor: pointer;"><i class="fas fa-minus-square"></i></a>
+<!--                                                    <a onclick="setOpenDoor(1);" style="cursor: pointer;"><i class="fas fa-door-open"></i></a>-->
+<!--                                                    <a onclick="setCloseDoor(1);" style="cursor: pointer;"><i class="fas fa-door-closed"></i></a>-->
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <div th:id="cabinet7"
+                                                 th:class="${cabinet7}==0 ? 'red_box' : 'blue_box'">
+                                                <p>7번</p>
+                                                <h3 th:text="${cabinet7}==0 ? '문 닫힘' : '문 열림'"></h3>
+                                                <h3 th:text="${isgoods7}==0 ? '상품 없음' : '상품 있음'" th:style="${isgoods7}==0 ? 'color:black;' : 'color:white;'"></h3>
+                                                <hr style="margin-top:3px; margin-bottom:3px;">
+                                                <p style="text-align:right;">
+                                                    <a onclick="setInsertGoods(7);" style="cursor: pointer;"><i class="fas fa-plus-square"></i></a>
+                                                    <a onclick="setDeleteGoods(7);" style="cursor: pointer;"><i class="fas fa-minus-square"></i></a>
+<!--                                                    <a onclick="setOpenDoor(7);" style="cursor: pointer;"><i class="fas fa-door-open"></i></a>-->
+<!--                                                    <a onclick="setCloseDoor(7);" style="cursor: pointer;"><i class="fas fa-door-closed"></i></a>-->
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <div th:id="cabinet13"
+                                                 th:class="${cabinet13}==0 ? 'red_box' : 'blue_box'">
+                                                <p>13번</p>
+                                                <h3 th:text="${cabinet13}==0 ? '문 닫힘' : '문 열림'"></h3>
+                                                <h3 th:text="${isgoods13}==0 ? '상품 없음' : '상품 있음'" th:style="${isgoods13}==0 ? 'color:black;' : 'color:white;'"></h3>
+                                                <hr style="margin-top:3px; margin-bottom:3px;">
+                                                <p style="text-align:right;">
+                                                    <a onclick="setInsertGoods(13);" style="cursor: pointer;"><i class="fas fa-plus-square"></i></a>
+                                                    <a onclick="setDeleteGoods(13);" style="cursor: pointer;"><i class="fas fa-minus-square"></i></a>
+<!--                                                    <a onclick="setOpenDoor(13);" style="cursor: pointer;"><i class="fas fa-door-open"></i></a>-->
+<!--                                                    <a onclick="setCloseDoor(13);" style="cursor: pointer;"><i class="fas fa-door-closed"></i></a>-->
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <div th:id="cabinet19"
+                                                 th:class="${cabinet19}==0 ? 'red_box' : 'blue_box'">
+                                                <p>19번</p>
+                                                <h3 th:text="${cabinet19}==0 ? '문 닫힘' : '문 열림'"></h3>
+                                                <h3 th:text="${isgoods19}==0 ? '상품 없음' : '상품 있음'" th:style="${isgoods19}==0 ? 'color:black;' : 'color:white;'"></h3>
+                                                <hr style="margin-top:3px; margin-bottom:3px;">
+                                                <p style="text-align:right;">
+                                                    <a onclick="setInsertGoods(19);" style="cursor: pointer;"><i class="fas fa-plus-square"></i></a>
+                                                    <a onclick="setDeleteGoods(19);" style="cursor: pointer;"><i class="fas fa-minus-square"></i></a>
+<!--                                                    <a onclick="setOpenDoor(19);" style="cursor: pointer;"><i class="fas fa-door-open"></i></a>-->
+<!--                                                    <a onclick="setCloseDoor(19);" style="cursor: pointer;"><i class="fas fa-door-closed"></i></a>-->
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;">
+                                            <div th:id="cabinet2"
+                                                 th:class="${cabinet2}==0 ? 'red_box' : 'blue_box'">
+                                                <p>2번</p>
+                                                <h3 th:text="${cabinet2}==0 ? '문 닫힘' : '문 열림'"></h3>
+                                                <h3 th:text="${isgoods2}==0 ? '상품 없음' : '상품 있음'" th:style="${isgoods2}==0 ? 'color:black;' : 'color:white;'"></h3>
+                                                <hr style="margin-top:3px; margin-bottom:3px;">
+                                                <p style="text-align:right;">
+                                                    <a onclick="setInsertGoods(2);" style="cursor: pointer;"><i class="fas fa-plus-square"></i></a>
+                                                    <a onclick="setDeleteGoods(2);" style="cursor: pointer;"><i class="fas fa-minus-square"></i></a>
+<!--                                                    <a onclick="setOpenDoor(2);" style="cursor: pointer;"><i class="fas fa-door-open"></i></a>-->
+<!--                                                    <a onclick="setCloseDoor(2);" style="cursor: pointer;"><i class="fas fa-door-closed"></i></a>-->
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <div th:id="cabinet8"
+                                                 th:class="${cabinet8}==0 ? 'red_box' : 'blue_box'">
+                                                <p>8번</p>
+                                                <h3 th:text="${cabinet8}==0 ? '문 닫힘' : '문 열림'"></h3>
+                                                <h3 th:text="${isgoods8}==0 ? '상품 없음' : '상품 있음'" th:style="${isgoods8}==0 ? 'color:black;' : 'color:white;'"></h3>
+                                                <hr style="margin-top:3px; margin-bottom:3px;">
+                                                <p style="text-align:right;">
+                                                    <a onclick="setInsertGoods(8);" style="cursor: pointer;"><i class="fas fa-plus-square"></i></a>
+                                                    <a onclick="setDeleteGoods(8);" style="cursor: pointer;"><i class="fas fa-minus-square"></i></a>
+<!--                                                    <a onclick="setOpenDoor(8);" style="cursor: pointer;"><i class="fas fa-door-open"></i></a>-->
+<!--                                                    <a onclick="setCloseDoor(8);" style="cursor: pointer;"><i class="fas fa-door-closed"></i></a>-->
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <div th:id="cabinet14"
+                                                 th:class="${cabinet14}==0 ? 'red_box' : 'blue_box'">
+                                                <p>14번</p>
+                                                <h3 th:text="${cabinet14}==0 ? '문 닫힘' : '문 열림'"></h3>
+                                                <h3 th:text="${isgoods14}==0 ? '상품 없음' : '상품 있음'" th:style="${isgoods14}==0 ? 'color:black;' : 'color:white;'"></h3>
+                                                <hr style="margin-top:3px; margin-bottom:3px;">
+                                                <p style="text-align:right;">
+                                                    <a onclick="setInsertGoods(14);" style="cursor: pointer;"><i class="fas fa-plus-square"></i></a>
+                                                    <a onclick="setDeleteGoods(14);" style="cursor: pointer;"><i class="fas fa-minus-square"></i></a>
+<!--                                                    <a onclick="setOpenDoor(14);" style="cursor: pointer;"><i class="fas fa-door-open"></i></a>-->
+<!--                                                    <a onclick="setCloseDoor(14);" style="cursor: pointer;"><i class="fas fa-door-closed"></i></a>-->
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <div th:id="cabinet20"
+                                                 th:class="${cabinet20}==0 ? 'red_box' : 'blue_box'">
+                                                <p>20번</p>
+                                                <h3 th:text="${cabinet20}==0 ? '문 닫힘' : '문 열림'"></h3>
+                                                <h3 th:text="${isgoods20}==0 ? '상품 없음' : '상품 있음'" th:style="${isgoods20}==0 ? 'color:black;' : 'color:white;'"></h3>
+                                                <hr style="margin-top:3px; margin-bottom:3px;">
+                                                <p style="text-align:right;">
+                                                    <a onclick="setInsertGoods(20);" style="cursor: pointer;"><i class="fas fa-plus-square"></i></a>
+                                                    <a onclick="setDeleteGoods(20);" style="cursor: pointer;"><i class="fas fa-minus-square"></i></a>
+<!--                                                    <a onclick="setOpenDoor(20);" style="cursor: pointer;"><i class="fas fa-door-open"></i></a>-->
+<!--                                                    <a onclick="setCloseDoor(20);" style="cursor: pointer;"><i class="fas fa-door-closed"></i></a>-->
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;">
+                                            <div th:id="cabinet3"
+                                                 th:class="${cabinet3}==0 ? 'red_box' : 'blue_box'">
+                                                <p>3번</p>
+                                                <h3 th:text="${cabinet3}==0 ? '문 닫힘' : '문 열림'"></h3>
+                                                <h3 th:text="${isgoods3}==0 ? '상품 없음' : '상품 있음'" th:style="${isgoods3}==0 ? 'color:black;' : 'color:white;'"></h3>
+                                                <hr style="margin-top:3px; margin-bottom:3px;">
+                                                <p style="text-align:right;">
+                                                    <a onclick="setInsertGoods(3);" style="cursor: pointer;"><i class="fas fa-plus-square"></i></a>
+                                                    <a onclick="setDeleteGoods(3);" style="cursor: pointer;"><i class="fas fa-minus-square"></i></a>
+<!--                                                    <a onclick="setOpenDoor(3);" style="cursor: pointer;"><i class="fas fa-door-open"></i></a>-->
+<!--                                                    <a onclick="setCloseDoor(3);" style="cursor: pointer;"><i class="fas fa-door-closed"></i></a>-->
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <div th:id="cabinet9"
+                                                 th:class="${cabinet9}==0 ? 'red_box' : 'blue_box'">
+                                                <p>9번</p>
+                                                <h3 th:text="${cabinet9}==0 ? '문 닫힘' : '문 열림'"></h3>
+                                                <h3 th:text="${isgoods9}==0 ? '상품 없음' : '상품 있음'" th:style="${isgoods9}==0 ? 'color:black;' : 'color:white;'"></h3>
+                                                <hr style="margin-top:3px; margin-bottom:3px;">
+                                                <p style="text-align:right;">
+                                                    <a onclick="setInsertGoods(9);" style="cursor: pointer;"><i class="fas fa-plus-square"></i></a>
+                                                    <a onclick="setDeleteGoods(9);" style="cursor: pointer;"><i class="fas fa-minus-square"></i></a>
+<!--                                                    <a onclick="setOpenDoor(9);" style="cursor: pointer;"><i class="fas fa-door-open"></i></a>-->
+<!--                                                    <a onclick="setCloseDoor(9);" style="cursor: pointer;"><i class="fas fa-door-closed"></i></a>-->
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <div th:id="cabinet15"
+                                                 th:class="${cabinet15}==0 ? 'red_box' : 'blue_box'">
+                                                <p>15번</p>
+                                                <h3 th:text="${cabinet15}==0 ? '문 닫힘' : '문 열림'"></h3>
+                                                <h3 th:text="${isgoods15}==0 ? '상품 없음' : '상품 있음'" th:style="${isgoods15}==0 ? 'color:black;' : 'color:white;'"></h3>
+                                                <hr style="margin-top:3px; margin-bottom:3px;">
+                                                <p style="text-align:right;">
+                                                    <a onclick="setInsertGoods(15);" style="cursor: pointer;"><i class="fas fa-plus-square"></i></a>
+                                                    <a onclick="setDeleteGoods(15);" style="cursor: pointer;"><i class="fas fa-minus-square"></i></a>
+<!--                                                    <a onclick="setOpenDoor(15);" style="cursor: pointer;"><i class="fas fa-door-open"></i></a>-->
+<!--                                                    <a onclick="setCloseDoor(15);" style="cursor: pointer;"><i class="fas fa-door-closed"></i></a>-->
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <div th:id="cabinet21"
+                                                 th:class="${cabinet21}==0 ? 'red_box' : 'blue_box'">
+                                                <p>21번</p>
+                                                <h3 th:text="${cabinet21}==0 ? '문 닫힘' : '문 열림'"></h3>
+                                                <h3 th:text="${isgoods21}==0 ? '상품 없음' : '상품 있음'" th:style="${isgoods21}==0 ? 'color:black;' : 'color:white;'"></h3>
+                                                <hr style="margin-top:3px; margin-bottom:3px;">
+                                                <p style="text-align:right;">
+                                                    <a onclick="setInsertGoods(21);" style="cursor: pointer;"><i class="fas fa-plus-square"></i></a>
+                                                    <a onclick="setDeleteGoods(21);" style="cursor: pointer;"><i class="fas fa-minus-square"></i></a>
+<!--                                                    <a onclick="setOpenDoor(21);" style="cursor: pointer;"><i class="fas fa-door-open"></i></a>-->
+<!--                                                    <a onclick="setCloseDoor(21);" style="cursor: pointer;"><i class="fas fa-door-closed"></i></a>-->
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;">
+                                            <div th:id="cabinet4"
+                                                 th:class="${cabinet4}==0 ? 'red_box' : 'blue_box'">
+                                                <p>4번</p>
+                                                <h3 th:text="${cabinet4}==0 ? '문 닫힘' : '문 열림'"></h3>
+                                                <h3 th:text="${isgoods4}==0 ? '상품 없음' : '상품 있음'" th:style="${isgoods4}==0 ? 'color:black;' : 'color:white;'"></h3>
+                                                <hr style="margin-top:3px; margin-bottom:3px;">
+                                                <p style="text-align:right;">
+                                                    <a onclick="setInsertGoods(4);" style="cursor: pointer;"><i class="fas fa-plus-square"></i></a>
+                                                    <a onclick="setDeleteGoods(4);" style="cursor: pointer;"><i class="fas fa-minus-square"></i></a>
+<!--                                                    <a onclick="setOpenDoor(4);" style="cursor: pointer;"><i class="fas fa-door-open"></i></a>-->
+<!--                                                    <a onclick="setCloseDoor(4);" style="cursor: pointer;"><i class="fas fa-door-closed"></i></a>-->
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <div th:id="cabinet10"
+                                                 th:class="${cabinet10}==0 ? 'red_box' : 'blue_box'">
+                                                <p>10번</p>
+                                                <h3 th:text="${cabinet10}==0 ? '문 닫힘' : '문 열림'"></h3>
+                                                <h3 th:text="${isgoods10}==0 ? '상품 없음' : '상품 있음'" th:style="${isgoods10}==0 ? 'color:black;' : 'color:white;'"></h3>
+                                                <hr style="margin-top:3px; margin-bottom:3px;">
+                                                <p style="text-align:right;">
+                                                    <a onclick="setInsertGoods(10);" style="cursor: pointer;"><i class="fas fa-plus-square"></i></a>
+                                                    <a onclick="setDeleteGoods(10);" style="cursor: pointer;"><i class="fas fa-minus-square"></i></a>
+<!--                                                    <a onclick="setOpenDoor(10);" style="cursor: pointer;"><i class="fas fa-door-open"></i></a>-->
+<!--                                                    <a onclick="setCloseDoor(10);" style="cursor: pointer;"><i class="fas fa-door-closed"></i></a>-->
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <div th:id="cabinet16"
+                                                 th:class="${cabinet16}==0 ? 'red_box' : 'blue_box'">
+                                                <p>16번</p>
+                                                <h3 th:text="${cabinet16}==0 ? '문 닫힘' : '문 열림'"></h3>
+                                                <h3 th:text="${isgoods16}==0 ? '상품 없음' : '상품 있음'" th:style="${isgoods16}==0 ? 'color:black;' : 'color:white;'"></h3>
+                                                <hr style="margin-top:3px; margin-bottom:3px;">
+                                                <p style="text-align:right;">
+                                                    <a onclick="setInsertGoods(16);" style="cursor: pointer;"><i class="fas fa-plus-square"></i></a>
+                                                    <a onclick="setDeleteGoods(16);" style="cursor: pointer;"><i class="fas fa-minus-square"></i></a>
+<!--                                                    <a onclick="setOpenDoor(16);" style="cursor: pointer;"><i class="fas fa-door-open"></i></a>-->
+<!--                                                    <a onclick="setCloseDoor(16);" style="cursor: pointer;"><i class="fas fa-door-closed"></i></a>-->
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <div th:id="cabinet22"
+                                                 th:class="${cabinet22}==0 ? 'red_box' : 'blue_box'">
+                                                <p>22번</p>
+                                                <h3 th:text="${cabinet22}==0 ? '문 닫힘' : '문 열림'"></h3>
+                                                <h3 th:text="${isgoods22}==0 ? '상품 없음' : '상품 있음'" th:style="${isgoods22}==0 ? 'color:black;' : 'color:white;'"></h3>
+                                                <hr style="margin-top:3px; margin-bottom:3px;">
+                                                <p style="text-align:right;">
+                                                    <a onclick="setInsertGoods(22);" style="cursor: pointer;"><i class="fas fa-plus-square"></i></a>
+                                                    <a onclick="setDeleteGoods(22);" style="cursor: pointer;"><i class="fas fa-minus-square"></i></a>
+<!--                                                    <a onclick="setOpenDoor(22);" style="cursor: pointer;"><i class="fas fa-door-open"></i></a>-->
+<!--                                                    <a onclick="setCloseDoor(22);" style="cursor: pointer;"><i class="fas fa-door-closed"></i></a>-->
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;">
+                                            <div th:id="cabinet5"
+                                                 th:class="${cabinet5}==0 ? 'red_box' : 'blue_box'">
+                                                <p>5번</p>
+                                                <h3 th:text="${cabinet5}==0 ? '문 닫힘' : '문 열림'"></h3>
+                                                <h3 th:text="${isgoods5}==0 ? '상품 없음' : '상품 있음'" th:style="${isgoods5}==0 ? 'color:black;' : 'color:white;'"></h3>
+                                                <hr style="margin-top:3px; margin-bottom:3px;">
+                                                <p style="text-align:right;">
+                                                    <a onclick="setInsertGoods(5);" style="cursor: pointer;"><i class="fas fa-plus-square"></i></a>
+                                                    <a onclick="setDeleteGoods(5);" style="cursor: pointer;"><i class="fas fa-minus-square"></i></a>
+<!--                                                    <a onclick="setOpenDoor(5);" style="cursor: pointer;"><i class="fas fa-door-open"></i></a>-->
+<!--                                                    <a onclick="setCloseDoor(5);" style="cursor: pointer;"><i class="fas fa-door-closed"></i></a>-->
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <div th:id="cabinet11"
+                                                 th:class="${cabinet11}==0 ? 'red_box' : 'blue_box'">
+                                                <p>11번</p>
+                                                <h3 th:text="${cabinet11}==0 ? '문 닫힘' : '문 열림'"></h3>
+                                                <h3 th:text="${isgoods11}==0 ? '상품 없음' : '상품 있음'" th:style="${isgoods11}==0 ? 'color:black;' : 'color:white;'"></h3>
+                                                <hr style="margin-top:3px; margin-bottom:3px;">
+                                                <p style="text-align:right;">
+                                                    <a onclick="setInsertGoods(11);" style="cursor: pointer;"><i class="fas fa-plus-square"></i></a>
+                                                    <a onclick="setDeleteGoods(11);" style="cursor: pointer;"><i class="fas fa-minus-square"></i></a>
+<!--                                                    <a onclick="setOpenDoor(11);" style="cursor: pointer;"><i class="fas fa-door-open"></i></a>-->
+<!--                                                    <a onclick="setCloseDoor(11);" style="cursor: pointer;"><i class="fas fa-door-closed"></i></a>-->
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <div th:id="cabinet17"
+                                                 th:class="${cabinet17}==0 ? 'red_box' : 'blue_box'">
+                                                <p>17번</p>
+                                                <h3 th:text="${cabinet17}==0 ? '문 닫힘' : '문 열림'"></h3>
+                                                <h3 th:text="${isgoods17}==0 ? '상품 없음' : '상품 있음'" th:style="${isgoods17}==0 ? 'color:black;' : 'color:white;'"></h3>
+                                                <hr style="margin-top:3px; margin-bottom:3px;">
+                                                <p style="text-align:right;">
+                                                    <a onclick="setInsertGoods(17);" style="cursor: pointer;"><i class="fas fa-plus-square"></i></a>
+                                                    <a onclick="setDeleteGoods(17);" style="cursor: pointer;"><i class="fas fa-minus-square"></i></a>
+<!--                                                    <a onclick="setOpenDoor(17);" style="cursor: pointer;"><i class="fas fa-door-open"></i></a>-->
+<!--                                                    <a onclick="setCloseDoor(17);" style="cursor: pointer;"><i class="fas fa-door-closed"></i></a>-->
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <div th:id="cabinet23"
+                                                 th:class="${cabinet23}==0 ? 'red_box' : 'blue_box'">
+                                                <p>23번</p>
+                                                <h3 th:text="${cabinet23}==0 ? '문 닫힘' : '문 열림'"></h3>
+                                                <h3 th:text="${isgoods23}==0 ? '상품 없음' : '상품 있음'" th:style="${isgoods23}==0 ? 'color:black;' : 'color:white;'"></h3>
+                                                <hr style="margin-top:3px; margin-bottom:3px;">
+                                                <p style="text-align:right;">
+                                                    <a onclick="setInsertGoods(23);" style="cursor: pointer;"><i class="fas fa-plus-square"></i></a>
+                                                    <a onclick="setDeleteGoods(23);" style="cursor: pointer;"><i class="fas fa-minus-square"></i></a>
+<!--                                                    <a onclick="setOpenDoor(23);" style="cursor: pointer;"><i class="fas fa-door-open"></i></a>-->
+<!--                                                    <a onclick="setCloseDoor(23);" style="cursor: pointer;"><i class="fas fa-door-closed"></i></a>-->
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;">
+                                            <div th:id="cabinet6"
+                                                 th:class="${cabinet6}==0 ? 'red_box' : 'blue_box'">
+                                                <p>6번</p>
+                                                <h3 th:text="${cabinet6}==0 ? '문 닫힘' : '문 열림'"></h3>
+                                                <h3 th:text="${isgoods6}==0 ? '상품 없음' : '상품 있음'" th:style="${isgoods6}==0 ? 'color:black;' : 'color:white;'"></h3>
+                                                <hr style="margin-top:3px; margin-bottom:3px;">
+                                                <p style="text-align:right;">
+                                                    <a onclick="setInsertGoods(6);" style="cursor: pointer;"><i class="fas fa-plus-square"></i></a>
+                                                    <a onclick="setDeleteGoods(6);" style="cursor: pointer;"><i class="fas fa-minus-square"></i></a>
+<!--                                                    <a onclick="setOpenDoor(6);" style="cursor: pointer;"><i class="fas fa-door-open"></i></a>-->
+<!--                                                    <a onclick="setCloseDoor(6);" style="cursor: pointer;"><i class="fas fa-door-closed"></i></a>-->
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <div th:id="cabinet12"
+                                                 th:class="${cabinet12}==0 ? 'red_box' : 'blue_box'">
+                                                <p>12번</p>
+                                                <h3 th:text="${cabinet12}==0 ? '문 닫힘' : '문 열림'"></h3>
+                                                <h3 th:text="${isgoods12}==0 ? '상품 없음' : '상품 있음'" th:style="${isgoods12}==0 ? 'color:black;' : 'color:white;'"></h3>
+                                                <hr style="margin-top:3px; margin-bottom:3px;">
+                                                <p style="text-align:right;">
+                                                    <a onclick="setInsertGoods(12);" style="cursor: pointer;"><i class="fas fa-plus-square"></i></a>
+                                                    <a onclick="setDeleteGoods(12);" style="cursor: pointer;"><i class="fas fa-minus-square"></i></a>
+<!--                                                    <a onclick="setOpenDoor(12);" style="cursor: pointer;"><i class="fas fa-door-open"></i></a>-->
+<!--                                                    <a onclick="setCloseDoor(12);" style="cursor: pointer;"><i class="fas fa-door-closed"></i></a>-->
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <div th:id="cabinet18"
+                                                 th:class="${cabinet18}==0 ? 'red_box' : 'blue_box'">
+                                                <p>18번</p>
+                                                <h3 th:text="${cabinet18}==0 ? '문 닫힘' : '문 열림'"></h3>
+                                                <h3 th:text="${isgoods18}==0 ? '상품 없음' : '상품 있음'" th:style="${isgoods18}==0 ? 'color:black;' : 'color:white;'"></h3>
+                                                <hr style="margin-top:3px; margin-bottom:3px;">
+                                                <p style="text-align:right;">
+                                                    <a onclick="setInsertGoods(18);" style="cursor: pointer;"><i class="fas fa-plus-square"></i></a>
+                                                    <a onclick="setDeleteGoods(18);" style="cursor: pointer;"><i class="fas fa-minus-square"></i></a>
+<!--                                                    <a onclick="setOpenDoor(18);" style="cursor: pointer;"><i class="fas fa-door-open"></i></a>-->
+<!--                                                    <a onclick="setCloseDoor(18);" style="cursor: pointer;"><i class="fas fa-door-closed"></i></a>-->
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <div th:id="cabinet24"
+                                                 th:class="${cabinet24}==0 ? 'red_box' : 'blue_box'">
+                                                <p>24번</p>
+                                                <h3 th:text="${cabinet24}==0 ? '문 닫힘' : '문 열림'"></h3>
+                                                <h3 th:text="${isgoods24}==0 ? '상품 없음' : '상품 있음'" th:style="${isgoods24}==0 ? 'color:black;' : 'color:white;'"></h3>
+                                                <hr style="margin-top:3px; margin-bottom:3px;">
+                                                <p style="text-align:right;">
+                                                    <a onclick="setInsertGoods(24);" style="cursor: pointer;"><i class="fas fa-plus-square"></i></a>
+                                                    <a onclick="setDeleteGoods(24);" style="cursor: pointer;"><i class="fas fa-minus-square"></i></a>
+<!--                                                    <a onclick="setOpenDoor(24);" style="cursor: pointer;"><i class="fas fa-door-open"></i></a>-->
+<!--                                                    <a onclick="setCloseDoor(24);" style="cursor: pointer;"><i class="fas fa-door-closed"></i></a>-->
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- Main Footer -->
+    <div th:insert="common/footer.html"></div>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+<div id="load"><img src="/dist/img/spinner.gif" alt="loading"></div>
+
+<!-- jQuery -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/dist/js/adminlte.min.js"></script>
+
+<script src="/js/cabinet/cabinetInfo.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript">
+    window.onbeforeunload = function () {
+        $('#load').show();
+    }
+    $(window).on('load', function () {
+        $("#load").hide();
+    });
+    window.onpageshow = function(event) {
+        if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+            $('#load').hide();
+        }
+    }
+</script>
+
+</body>
+</html>

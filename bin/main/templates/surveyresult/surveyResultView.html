@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>왕인박사관리사이트 | 설문결과</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+    <!--    로딩CSS-->
+    <link rel="stylesheet" href="/dist/css/loadscene.css">
+    <style>
+        .abbwords{
+            color: black;
+            width: 600px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+    </style>
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- Navbar -->
+    <div th:insert="common/navbar.html"></div>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <div th:insert="common/mainsidbar.html"></div>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>설문 결과</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <h5 th:id="userid" th:text="'고객아이디: ' +${userid}"></h5>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-12">
+                        <!-- general form elements -->
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title" th:id="title" th:text="${title}"></h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <!-- <form> -->
+                            <div class="card-body">
+
+                                <ul id="accordion" style="padding-left: 0px;" class="ui-sortable">
+<!--                                    <li id="q_1" class="card card-primary card-outline">-->
+<!--                                        <input type="hidden" value="1">-->
+<!--                                        <a class="d-block w-100" >-->
+<!--                                            <div class="card-header">-->
+<!--                                                <h4 class="card-title" style="display:inline;">-->
+<!--                                                    1.왕인박사 테스트 소감 어땠나요?-->
+<!--                                                </h4>-->
+<!--                                                <h4 id="q_1_toptitle" class="card-title abbwords"-->
+<!--                                                    style="display:inline;">-->
+
+<!--                                                </h4>-->
+<!--                                            </div>-->
+<!--                                        </a>-->
+
+<!--                                        <div id="collapse1" class="collapse show" data-parent="#accordion" style="">-->
+<!--                                            <div id="q_1_body_mult" class="card-body">-->
+<!--                                                <div class="form-group row">-->
+<!--                                                    <label class="col-form-label" for="q_1_input_a1">A1:</label>-->
+<!--                                                    <div class="col-sm-11">-->
+<!--                                                        <input type="text" class="form-control" id="q_1_input_a1"-->
+<!--                                                               value="매우 좋음"-->
+
+<!--                                                               readonly="readonly">-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="form-group row">-->
+<!--                                                    <label class="col-form-label" for="q_1_input_a2">A2:</label>-->
+<!--                                                    <div class="col-sm-11">-->
+<!--                                                        <input type="text" class="form-control" id="q_1_input_a2"-->
+<!--                                                               value="좋음"-->
+
+<!--                                                               readonly="readonly">-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="form-group row">-->
+<!--                                                    <label class="col-form-label" for="q_1_input_a3">A3:</label>-->
+<!--                                                    <div class="col-sm-11">-->
+<!--                                                        <input type="text" class="form-control" id="q_1_input_a3"-->
+<!--                                                               value="보통"-->
+
+<!--                                                               readonly="readonly">-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="form-group row">-->
+<!--                                                    <label class="col-form-label" for="q_1_input_a4">A4:</label>-->
+<!--                                                    <div class="col-sm-11">-->
+<!--                                                        <input type="text" class="form-control" id="q_1_input_a4"-->
+<!--                                                               value="나쁨"-->
+<!--                                                               style="color:red; font-Weight:bold; font-style:italic;"-->
+<!--                                                               readonly="readonly">-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="form-group row">-->
+<!--                                                    <label class="col-form-label" for="q_1_input_a5">A5:</label>-->
+<!--                                                    <div class="col-sm-11">-->
+<!--                                                        <input type="text" class="form-control" id="q_1_input_a5"-->
+<!--                                                               value="매우 나쁨"-->
+
+<!--                                                               readonly="readonly">-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </li>-->
+
+<!--                                    <li id="q_2" class="card card-primary card-outline">-->
+<!--                                        <input type="hidden" value="1">-->
+<!--                                        <a class="d-block w-100" >-->
+<!--                                            <div class="card-header">-->
+<!--                                                <h4 class="card-title" style="display:inline;">-->
+<!--                                                    2.왕인박사에게 바라는 점이 있으면 알려주세요.-->
+<!--                                                </h4>-->
+<!--                                                <h4 id="q_2_toptitle" class="card-title abbwords"-->
+<!--                                                    style="display:inline;">-->
+
+<!--                                                </h4>-->
+<!--                                            </div>-->
+<!--                                        </a>-->
+
+<!--                                        <div id="collapse2" class="collapse show" data-parent="#accordion" style="">-->
+<!--                                            <div id="q_2_body_mult" class="card-body">-->
+<!--                                                <div class="form-group row">-->
+<!--                                                    <label class="col-form-label" for="q_1_input_a1">A1:</label>-->
+<!--                                                    <div class="col-sm-11">-->
+<!--                                                        <input type="text" class="form-control" id="q_2_input_a1"-->
+<!--                                                               value="컨텐츠를 더 많이 늘려야 할 것 같네요. 그리고 왕인박사 실행할 때마다 배터리가 광탈되요. 이것 좀 고쳐주세요."-->
+<!--                                                               style="color:red; font-Weight:bold; font-style:italic;"-->
+<!--                                                               readonly="readonly">-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </li>-->
+
+
+                                </ul>
+                            </div>
+                            <!-- /.card-body -->
+
+                            <!-- </form> -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!--/.col (left) -->
+                </div>
+                <!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- Main Footer -->
+    <div th:insert="common/footer.html"></div>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+<div id="load"><img src="/dist/img/spinner.gif" alt="loading"></div>
+<!-- jQuery -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- bs-custom-file-input -->
+<script src="/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<!-- AdminLTE -->
+<script src="/dist/js/adminlte.js"></script>
+<!-- AdminLTE App -->
+<script src="/dist/js/adminlte.min.js"></script>
+<script th:inline="javascript">
+    var qqqe = [[${accordion}]];
+</script>
+<script src="/js/surveyresult/surveyResultView.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- Page specific script -->
+<script type="text/javascript">
+    window.onbeforeunload = function () {
+        $('#load').show();
+    }
+    $(window).on('load', function () {
+        $("#load").hide();
+    });
+    window.onpageshow = function(event) {
+        if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+            $('#load').hide();
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>왕인박사관리사이트 | 유적지정보</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+    <!--    로딩CSS-->
+    <link rel="stylesheet" href="/dist/css/loadscene.css">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- Navbar -->
+    <div th:insert="common/navbar.html"></div>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <div th:insert="common/mainsidbar.html"></div>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>유적지 정보</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">대시보드</a></li>
+                            <li class="breadcrumb-item active">유적지정보</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                    <form th:action="${form_action}" method="post" onsubmit="return submitInsert();">
+                        <input type="hidden" name="RI_PK" th:value="${ri_pk}">
+                        <div class="card-header">
+                            <h3 class="card-title" th:text="${form_title_text}">유적지 등록</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="ruinsName">유적 이름</label>
+                                <input type="text" class="form-control" id="ruinsName" name="RI_NAME" placeholder="유적 이름을 입력하세요." th:value="${ri_name}">
+                            </div>
+                            <div class="form-group">
+                                <label for="ruinsCode">유적 코드</label>
+                                <input type="text" class="form-control" id="ruinsCode" name="RI_CODE" placeholder="유적 코드를 입력하세요." th:value="${ri_code}">
+                            </div>
+                            <div class="form-group">
+                                <label>유적 설명</label>
+                                <textarea class="form-control" id="ruinsExp" rows="10" name="RI_EXP" maxlength="1024" th:text="${ri_exp}"></textarea>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary" th:text="${form_submit_text}">등록하기</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.card -->
+                <!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </section>
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- Main Footer -->
+    <div th:insert="common/footer.html"></div>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+<div id="load"><img src="/dist/img/spinner.gif" alt="loading"></div>
+<!-- jQuery -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/dist/js/adminlte.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="/js/ruins/ruinsWrite.js"></script>
+<script type="text/javascript">
+    window.onbeforeunload = function () {
+        $('#load').show();
+    }
+    $(window).on('load', function () {
+        $("#load").hide();
+    });
+    window.onpageshow = function(event) {
+        if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+            $('#load').hide();
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>왕인박사관리사이트 | 대시보드</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+    <!-- IonIcons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="/plugins/summernote/summernote-bs4.min.css">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker.css">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Bootstrap Color Picker -->
+    <link rel="stylesheet" href="/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- Bootstrap4 Duallistbox -->
+    <link rel="stylesheet" href="/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
+    <!-- BS Stepper -->
+    <link rel="stylesheet" href="/plugins/bs-stepper/css/bs-stepper.min.css">
+    <!-- dropzonejs -->
+    <link rel="stylesheet" href="/plugins/dropzone/min/dropzone.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css"/>
+    <!--    로딩CSS-->
+    <link rel="stylesheet" href="/dist/css/loadscene.css">
+    <style>
+        .card-in-p{
+            text-align:right;
+        }
+    </style>
+</head>
+<!--
+`body` tag options:
+
+Apply one or more of the following classes to to the body tag
+to get the desired effect
+
+* sidebar-collapse
+* sidebar-mini
+-->
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- Navbar -->
+    <div th:insert="common/navbar.html"></div>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <div th:insert="common/mainsidbar.html"></div>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">이용현황</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">왕인박사 이용 현황 모니터링</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h4 style="font-weight: 700;">신규 유저 (일)</h4>
+                                <p>오늘: <span th:id="new_users_count_today" th:text="${new_users_count_today}+명"></span></p>
+                                <p>1일전 : <span th:id="new_users_count_1" th:text="${new_users_count_1}+명"></span></p>
+                                <p>2일전 : <span th:id="new_users_count_2" th:text="${new_users_count_2}+명"></span></p>
+                                <p>3일전 : <span th:id="new_users_count_3" th:text="${new_users_count_3}+명"></span></p>
+                                <p>4일전 : <span th:id="new_users_count_4" th:text="${new_users_count_4}+명"></span></p>
+                                <p>5일전 : <span th:id="new_users_count_5" th:text="${new_users_count_5}+명"></span></p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-person-add"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h4 style="font-weight: 700;">앱 실행 (일)</h4>
+                                <p>오늘: <span th:id="app_run_count_today" th:text="${app_run_count_today}+회"></span></p>
+                                <p>1일전 : <span th:id="app_run_count_1" th:text="${app_run_count_1}+회"></span></p>
+                                <p>2일전 : <span th:id="app_run_count_2" th:text="${app_run_count_2}+회"></span></p>
+                                <p>3일전 : <span th:id="app_run_count_3" th:text="${app_run_count_3}+회"></span></p>
+                                <p>4일전 : <span th:id="app_run_count_4" th:text="${app_run_count_4}+회"></span></p>
+                                <p>5일전 : <span th:id="app_run_count_5" th:text="${app_run_count_5}+회"></span></p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-tablet-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-warning">
+                            <div class="inner">
+                                <h4 style="font-weight: 700;">보물찾기 (일)</h4>
+                                <p>오늘: <span th:id="treasurehunt_count_today" th:text="${treasurehunt_count_today}+회"></span></p>
+                                <p>1일전 : <span th:id="treasurehunt_count_1" th:text="${treasurehunt_count_1}+회"></span></p>
+                                <p>2일전 : <span th:id="treasurehunt_count_2" th:text="${treasurehunt_count_2}+회"></span></p>
+                                <p>3일전 : <span th:id="treasurehunt_count_3" th:text="${treasurehunt_count_3}+회"></span></p>
+                                <p>4일전 : <span th:id="treasurehunt_count_4" th:text="${treasurehunt_count_4}+회"></span></p>
+                                <p>5일전 : <span th:id="treasurehunt_count_5" th:text="${treasurehunt_count_5}+회"></span></p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-gifts"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h4 style="font-weight: 700;">전시물탐지 (일)</h4>
+                                <p>오늘: <span th:id="detecting_count_today" th:text="${detecting_count_today}+회"></span></p>
+                                <p>1일전 : <span th:id="detecting_count_1" th:text="${detecting_count_1}+회"></span></p>
+                                <p>2일전 : <span th:id="detecting_count_2" th:text="${detecting_count_2}+회"></span></p>
+                                <p>3일전 : <span th:id="detecting_count_3" th:text="${detecting_count_3}+회"></span></p>
+                                <p>4일전 : <span th:id="detecting_count_4" th:text="${detecting_count_4}+회"></span></p>
+                                <p>5일전 : <span th:id="detecting_count_5" th:text="${detecting_count_5}+회"></span></p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!--                            주 단위                -->
+        <div class="content" >
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h4 style="font-weight: 700;" th:id="month0" th:text="${month} + '월 신규 유저 (주)'"></h4>
+                                <p>1주차 : <span th:id="new_users_count_week_1" th:text="${new_users_count_week_1}+명"></span></p>
+                                <p>2주차 : <span th:id="new_users_count_week_2" th:text="${new_users_count_week_2}+명"></span></p>
+                                <p>3주차 : <span th:id="new_users_count_week_3" th:text="${new_users_count_week_3}+명"></span></p>
+                                <p>4주차 : <span th:id="new_users_count_week_4" th:text="${new_users_count_week_4}+명"></span></p>
+                                <p>5주차 : <span th:id="new_users_count_week_5" th:text="${new_users_count_week_5}+명"></span></p>
+                                <div class="icon">
+                                    <i class="ion ion-person-add"></i>
+                                    <div class="input-group date" id="reservationdate0" data-target-input="nearest">
+                                        <input type="text" name="days" class="form-control datetimepicker-input" id="type0" data-target="#reservationdate0" data-toggle="datetimepicker" style="background-color:white;" oninput="log0()">
+                                        <div class="input-group-append" data-target="#reservationdate0" data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div>
+                                        <!--                                    <button type="submit" class="btn btn-sm btn-default" onclick="log0()">-->
+                                        <!--                                        <i class="fa fa-search"></i>-->
+                                        <!--                                    </button>-->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h4 style="font-weight: 700;" th:id="month1" th:text="${month} + '월 앱 실행 (주)'"></h4>
+                                <p>1주차 : <span th:id="app_run_count_week_1" th:text="${app_run_count_week_1}+회"></span></p>
+                                <p>2주차 : <span th:id="app_run_count_week_2" th:text="${app_run_count_week_2}+회"></span></p>
+                                <p>3주차 : <span th:id="app_run_count_week_3" th:text="${app_run_count_week_3}+회"></span></p>
+                                <p>4주차 : <span th:id="app_run_count_week_4" th:text="${app_run_count_week_4}+회"></span></p>
+                                <p>5주차 : <span th:id="app_run_count_week_5" th:text="${app_run_count_week_5}+회"></span></p>
+                                <div class="icon">
+                                    <i class="fas fa-tablet-alt"></i>
+                                    <div class="input-group date" id="reservationdate1" data-target-input="nearest">
+                                        <input type="text" name="days" class="form-control datetimepicker-input" id="type1" data-target="#reservationdate1" data-toggle="datetimepicker" style="background-color:white;" oninput="log1()">
+                                        <div class="input-group-append" data-target="#reservationdate1" data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div>
+                                        <!--                                    <button type="submit" class="btn btn-sm btn-default" onclick="log1()">-->
+                                        <!--                                        <i class="fa fa-search"></i>-->
+                                        <!--                                    </button>-->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-warning">
+                            <div class="inner">
+                                <h4 style="font-weight: 700;" th:id="month2" th:text="${month} + '월 보물찾기 (주)'"></h4>
+                                <p>1주차 : <span th:id="treasurehunt_count_week_1" th:text="${treasurehunt_count_week_1}+회"></span></p>
+                                <p>2주차 : <span th:id="treasurehunt_count_week_2" th:text="${treasurehunt_count_week_2}+회"></span></p>
+                                <p>3주차 : <span th:id="treasurehunt_count_week_3" th:text="${treasurehunt_count_week_3}+회"></span></p>
+                                <p>4주차 : <span th:id="treasurehunt_count_week_4" th:text="${treasurehunt_count_week_4}+회"></span></p>
+                                <p>5주차 : <span th:id="treasurehunt_count_week_5" th:text="${treasurehunt_count_week_5}+회"></span></p>
+                                <div class="icon">
+                                    <i class="fas fa-gifts"></i>
+                                    <div class="input-group date" id="reservationdate2" data-target-input="nearest">
+                                        <input type="text" name="days" class="form-control datetimepicker-input" id="type2" data-target="#reservationdate2" data-toggle="datetimepicker" style="background-color:white;" oninput="log2()">
+                                        <div class="input-group-append" data-target="#reservationdate2" data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div>
+                                        <!--                                    <button type="submit" class="btn btn-sm btn-default" onclick="log2()">-->
+                                        <!--                                        <i class="fa fa-search"></i>-->
+                                        <!--                                    </button>-->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h4 style="font-weight: 700;" th:id="month3" th:text="${month} + '월 전시물탐지 (주)'"></h4>
+                                <p>1주차 : <span th:id="detecting_count_week_1" th:text="${detecting_count_week_1}+회"></span></p>
+                                <p>2주차 : <span th:id="detecting_count_week_2" th:text="${detecting_count_week_2}+회"></span></p>
+                                <p>3주차 : <span th:id="detecting_count_week_3" th:text="${detecting_count_week_3}+회"></span></p>
+                                <p>4주차 : <span th:id="detecting_count_week_4" th:text="${detecting_count_week_4}+회"></span></p>
+                                <p>5주차 : <span th:id="detecting_count_week_5" th:text="${detecting_count_week_5}+회"></span></p>
+                                <div class="icon">
+                                    <i class="fas fa-search"></i>
+                                    <div class="input-group date" id="reservationdate3" data-target-input="nearest">
+                                        <input type="text" name="days" class="form-control datetimepicker-input" id="type3" data-target="#reservationdate3" data-toggle="datetimepicker" style="background-color:white;" oninput="log3()">
+                                        <div class="input-group-append" data-target="#reservationdate3" data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div>
+                                        <!--                                    <button type="submit" class="btn btn-sm btn-default" onclick="log3()">-->
+                                        <!--                                        <i class="fa fa-search"></i>-->
+                                        <!--                                    </button>-->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+
+    <!-- Main Footer -->
+    <div th:insert="common/footer.html"></div>
+</div>
+<!-- ./wrapper -->
+<div id="load"><img src="/dist/img/spinner.gif" alt="loading"></div>
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE -->
+<script src="/dist/js/adminlte.js"></script>
+
+<!-- bs-custom-file-input -->
+<script src="/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<!-- 에디터 -->
+<script src="/plugins/summernote/summernote-bs4.min.js"></script>
+
+<!-- 달력 -->
+<!-- Select2 -->
+<script src="/plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src="/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- InputMask -->
+<script src="/plugins/moment/moment.min.js"></script>
+<script src="/plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Bootstrap Switch -->
+<script src="/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<!-- BS-Stepper -->
+<script src="/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+<!-- dropzonejs -->
+<script src="/plugins/dropzone/min/dropzone.min.js"></script>
+<script src="/dist/js/pages/dashboard3.js"></script>
+<script src="/js/dashboard/dashboard.js"></script>
+<script type="text/javascript">
+    window.onbeforeunload = function () {
+        $('#load').show();
+    }
+    $(window).on('load', function () {
+        $("#load").hide();
+    });
+    window.onpageshow = function(event) {
+        if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+            $('#load').hide();
+        }
+    }
+</script>
+</body>
+</html>

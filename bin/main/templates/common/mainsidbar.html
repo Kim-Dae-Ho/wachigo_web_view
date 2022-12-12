@@ -1,0 +1,96 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4" xmlns:th="http://www.w3.org/1999/xhtml">
+    <!-- Brand Logo -->
+    <a href="/main" class="brand-link">
+<!--        <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">-->
+        <span class="brand-text font-weight-light">왕인박사관리사이트</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+                     with font-awesome or any other icon font library -->
+                <li class="nav-item">
+                    <a href="/main" th:class="${nowurl0 == '/log' ? 'nav-link active' : 'nav-link'}">
+                        <i class="nav-icon fas fa-chart-line"></i>
+                        <p>
+                            이용현황
+                        </p>
+                    </a>
+                </li>
+                <!--<li class="nav-header">사용자</li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a href="#" class="nav-link">-->
+<!--                        <i class="nav-icon far fa-user-circle"></i>-->
+<!--                        <p>-->
+<!--                            사용자 정보-->
+<!--                        </p>-->
+<!--                    </a>-->
+<!--                </li>-->
+                <!--<li class="nav-header">선물함</li>-->
+                <li class="nav-item">
+                    <a href="/cabinet/info" th:class="${nowurl0 == '/cabinet' ? 'nav-link active' : 'nav-link'}">
+                        <i class="nav-icon fas fa-boxes"></i>
+                        <p>
+                            선물함 상태
+                        </p>
+                    </a>
+                </li>
+                <!--<li class="nav-header">보물찾기</li>-->
+                <li th:class="${nowurl0 == '/treasurehunt' ? 'nav-item menu-is-opening menu-open' : 'nav-item'}">
+                    <a href="#" th:class="${nowurl0 == '/treasurehunt' ? 'nav-link active' : 'nav-link'}">
+                        <i class="nav-icon far fa-gem"></i>
+                        <p>
+                            보물찾기
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/treasurehunt/info" th:class="${nowurl1 == '/treasurehunt/info' ? 'nav-link active' : 'nav-link'}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>이용정보</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/treasurehunt/location" th:class="${nowurl1 == '/treasurehunt/location' ? 'nav-link active' : 'nav-link'}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>위치설정</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!--<li class="nav-header">유적지</li>-->
+                <li class="nav-item">
+                    <a href="/ruins/list" th:class="${nowurl0 == '/ruins' ? 'nav-link active' : 'nav-link'}">
+                        <i class="nav-icon far fa-building"></i>
+                        <p>
+                            유적지 정보
+                        </p>
+                    </a>
+                </li>
+                <!--<li class="nav-header">설문</li>-->
+                <li class="nav-item">
+                    <a href="/survey/list" th:class="${nowurl0 == '/survey' ? 'nav-link active' : 'nav-link'}">
+                        <i class="nav-icon far fa-file"></i>
+                        <p>
+                            설문 정보
+                        </p>
+                    </a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a href="/surveyresult/view" th:class="${nowurl0 == '/surveyresult' ? 'nav-link active' : 'nav-link'}">
+                        <i class="nav-icon far fa-file-alt"></i>
+                        <p>
+                            설문 결과
+                        </p>
+                    </a>
+                </li> -->
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>

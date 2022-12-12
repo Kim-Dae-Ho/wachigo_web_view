@@ -1,0 +1,24 @@
+{
+    "data" : [
+        {
+            "name": "서구청",
+            "desc": "<div style='padding:5px;'><a href='javascript:void(0)' onclick='unity.call(1)'>서구청</a></div>",
+            "positions": [35.151988, 126.889924]
+        },
+        {
+            "name": "AI스타트업",
+            "desc": "<div style='padding:5px;'><a href='javascript:void(1)' onclick='unity.call(1)'>AI스타트업</a></div>",
+            "positions": [35.152801, 126.890184]
+        },
+        {
+            "name": "국밥집",
+            "desc": "<div style='padding:5px;'><a href='javascript:void(2)' onclick='unity.call(1)'>국밥집</a></div>",
+            "positions": [35.152927, 126.888431]
+        },
+        {
+            "name": "농성공원",
+            "desc": "<div style='padding:5px;'><a href='javascript:void(3)' onclick='unity.call(1)'>농성공원</a></div>",
+            "positions": [35.153001, 126.885484]
+        }
+    ]
+}

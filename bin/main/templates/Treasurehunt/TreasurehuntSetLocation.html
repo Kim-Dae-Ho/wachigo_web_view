@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>왕인박사관리사이트 | 보물찾기 위치정보</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <!--    로딩CSS-->
+    <link rel="stylesheet" href="/dist/css/loadscene.css">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- Navbar -->
+    <div th:insert="common/navbar.html"></div>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <div th:insert="common/mainsidbar.html"></div>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>보물찾기 위치정보</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">대시보드</a></li>
+                            <li class="breadcrumb-item active">보물찾기 위치정보</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title"></h3>
+                                <!--                                <div class="input-group input-group-sm card-title" style="width: 20%;">-->
+                                <!--                                    <input type="search" class="form-control form-control-sm"-->
+                                <!--                                           placeholder="검색어를 입력하세요" id="titleText" name="titleText" onkeyup="enterkey()">-->
+                                <!--                                    <div class="input-group-append">-->
+                                <!--                                        <button type="submit" class="btn btn-sm btn-default" onclick="searching()">-->
+                                <!--                                            <i class="fa fa-search"></i>-->
+                                <!--                                        </button>-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
+                                <!--                                <div class="card-tools">-->
+                                <!--                                    <div class="input-group input-group-sm" style="width: 150px;">-->
+
+                                <!--                                        <a href="/survey/write" class="btn btn-block btn-primary">-->
+                                <!--                                            <i class="far fa-plus-square"></i> 추가하기-->
+                                <!--                                        </a>-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover text-nowrap">
+                                    <thead>
+                                    <tr>
+                                        <th style="text-align:center;">No</th>
+                                        <th style="text-align:center;">위도</th>
+                                        <th style="text-align:center;">경도</th>
+                                        <th style="text-align:center;">수정하기</th>
+<!--                                        <th style="text-align:center;">최근수정날짜시간</th>-->
+                                    </tr>
+                                    </thead>
+                                    <tbody id="treasurehunt_set_location">
+                                    <tr th:if="${treasurehunt_set_location}!=null"
+                                        th:each="Co, num : ${treasurehunt_set_location}">
+
+                                        <td style="text-align:center;">
+                                            <span th:if="${Co.tslpk}!= null" th:text="${Co.tslpk}"></span>
+                                            <input th:id="'a'+${num.index+1}" th:value="${Co.tslpk}" type="hidden">
+                                        </td>
+
+                                        <td style="text-align:center;" th:if="${Co.tsllatitude} != null">
+                                            <div class="form-group row" style="margin:auto;">
+                                                <div class="col-sm-12">
+                                                    <input type="text" class="form-control" th:id="'b'+${num.index+1}"
+                                                           th:value="${Co.tsllatitude}" readonly="readonly">
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td style="text-align:center;" th:if="${Co.tsllongitude} != null">
+                                            <div class="form-group row" style="margin:auto;">
+                                                <div class="col-sm-12">
+                                                    <input type="text" class="form-control" th:id="'c'+${num.index+1}"
+                                                           th:value="${Co.tsllongitude}" readonly="readonly">
+                                                </div>
+                                            </div>
+                                        <td style="text-align:center;">
+                                            <button type="button" class="btn btn-success" data-toggle="modal"
+                                                    data-target="#modal-primary" th:id="'d'+${num.index+1}"
+                                                    th:onclick="|javascript:row_modify_state(${num.index+1})|"
+                                                    value="수정하기">수정하기
+                                            </button>
+                                        </td>
+
+<!--                                        <td style="text-align:center;">-->
+<!--                                            <span th:text="${#temporals.format(Co.tslmodifydatetime, 'yyyy-MM-dd HH:mm:ss')}"-->
+<!--                                                  id="tslmodifydatetime"></span>-->
+<!--                                        </td>-->
+                                    </tr>
+                                    </tbody>
+                                </table>
+<!--                                <div class="card-footer">-->
+<!--                                    <button type="button" onclick="button_state()" class="btn btn-primary">위치 수정하기-->
+<!--                                    </button>-->
+<!--                                    <input id="length" th:value="${length}" type="hidden">-->
+<!--                                </div>-->
+                            </div>
+                            <!-- /.card-body -->
+                            <!--                            <div class="card-footer clearfix">-->
+                            <!--                                    <ul class="pagination pagination-sm m-0 justify-content-center" id="pageList">-->
+
+
+                            <!--                                        <li class="page-item">-->
+                            <!--                                            <a class="page-link" aria-label="Previous"-->
+                            <!--                                               th:onclick="|javascript:paging(0)|"><span>처음</span></a>-->
+                            <!--                                        </li>-->
+
+                            <!--                                        <li class="page-item prev-page" th:if="${isPrevSection}"-->
+
+                            <!--                                            th:value="${thisSection}">-->
+                            <!--                                            <a class="page-link" aria-label="Previous"-->
+                            <!--                                               th:onclick="|javascript:paging(${firstBtnIndex}-1)|">이전</a>-->
+                            <!--                                        </li>-->
+
+                            <!--                                        &lt;!&ndash;            <li th:each="page: ${#numbers.sequence(0,9)}" th:id="pageItem+${page}" class="page-item" th:classappend="${thisPage} ==  ${page} ?  'active'"><a class="page-link" th:href="@{/testDB(page=${page})}"><span th:text="${page+1}"></span></a></li>&ndash;&gt;-->
+
+                            <!--                                        &lt;!&ndash;            onclick 구현&ndash;&gt;-->
+                            <!--                                        <li th:each="page: ${#numbers.sequence(firstBtnIndex,lastBtnIndex)}"-->
+                            <!--                                            id="pageItem" class="page-item"-->
+                            <!--                                            th:classappend="${thisPage} ==  ${page} ?  'active'" th:value="${page}"><a-->
+                            <!--                                                class="page-link" th:onclick="|javascript:paging(${page})|"><span-->
+                            <!--                                                th:text="${page+1}"></span></a></li>-->
+                            <!--                                        &lt;!&ndash;            onclick 구현&ndash;&gt;-->
+
+
+                            <!--                                        &lt;!&ndash;다음버튼2&ndash;&gt;-->
+                            <!--                                        <li class="page-item next-page" th:if="${isNextSection}"-->
+                            <!--                                            th:onclick="|javascript:paging(${lastBtnIndex}+1)|"-->
+                            <!--                                            th:value="${thisSection}">-->
+                            <!--                                            <a class="page-link" aria-label="Next">-->
+                            <!--                                                <span aria-hidden="true">다음</span>-->
+                            <!--                                                <span class="sr-only">Next</span>-->
+                            <!--                                            </a>-->
+                            <!--                                        </li>-->
+                            <!--                                        &lt;!&ndash;다음버튼2&ndash;&gt;-->
+
+
+                            <!--                                        <li class="page-item">-->
+                            <!--                                            <a class="page-link" id="pageItem2"-->
+                            <!--                                               th:onclick="|javascript:paging(${totalPage})|"-->
+                            <!--                                               aria-label="Previous">끝</a>-->
+                            <!--                                        </li>-->
+                            <!--                                    </ul>-->
+                            <!--                            </div>-->
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- Main Footer -->
+    <div th:insert="common/footer.html"></div>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+<div id="load"><img src="/dist/img/spinner.gif" alt="loading"></div>
+
+<!-- jQuery -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/dist/js/adminlte.min.js"></script>
+
+<script src="/js/treasurehunt/TrasurehuntModify.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript">
+    window.onbeforeunload = function () {
+        $('#load').show();
+    }
+    $(window).on('load', function () {
+        $("#load").hide();
+    });
+    window.onpageshow = function(event) {
+        if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+            $('#load').hide();
+        }
+    }
+</script>
+</body>
+</html>
