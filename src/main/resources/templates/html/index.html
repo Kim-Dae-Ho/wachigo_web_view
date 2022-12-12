@@ -81,7 +81,7 @@
     </div>
 </nav>
 
-<div style="text-align: center">
+<div id="scroll" style="text-align: center">
     <input type="hidden" id="latitude1" th:value="${latitude1}">
     <input type="hidden" id="longitude1" th:value="${longitude1}">
     <button style="width:70pt;height:30pt;" onclick="setDraggable(false)">현위치 끄기</button>
@@ -228,7 +228,6 @@
 
     var positions = new Array();
 
-
     for (idx in my_positions){
         var i = idx;
         var temp_name = my_positions[idx]["zone_name"]
@@ -355,6 +354,12 @@ event.preventDefault();
 event.stopPropagation();
 return false;
 
+});
+
+$("#scroll").on('scroll touchmove mousewheel', function(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  return false;
 });
 
 
