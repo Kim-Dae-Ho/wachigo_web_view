@@ -109,8 +109,6 @@
     var global_locPosition = null;
     var latitude1 = document.getElementById("latitude1").value;
     var longitude1 = document.getElementById("longitude1").value;
-    var real_maker = null;
-    var real_locPosition = null;
 
     // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
     var markers = [];
@@ -145,7 +143,6 @@
             message = '<div style="padding:5px;">내 위치</div>'; // 인포윈도우에 표시될 내용입니다
             // message = `<div class="acustomoverlay"><a onclick="go_function();"><span class="title">내 위치</span></a></div>`; // 인포윈도우에 표시될 내용입니다
             image = markerImage // 마커이미지 설정
-            real_locPosition = locPosition;
         // 마커와 인포윈도우를 표시합니다
         displayMarker(markerImage, locPosition, message);
 
@@ -158,8 +155,6 @@
                 position: locPosition,
                 image: markerImage
             });
-            real_maker = null;
-            real_maker = marker;
 
             var iwContent = message, // 인포윈도우에 표시할 내용
                 iwRemoveable = true;
@@ -188,20 +183,14 @@
                 setDraggable(true);
                 map.setCenter(locPosition);
             }
-            
-
         }
         //개인 내 위치 끝
         setMarkers();
     }
 
-    console.log(real_maker);
-
     kakao.maps.event.addListener(map, 'center_changed', function() {
         setDraggable(false);
     });
-
-
 
     function setMarkers() {
         for (var i = 0; i < markers.length-1; i++) {
@@ -230,13 +219,13 @@
     for (idx in my_positions){
         var i = idx;
         var temp_name = my_positions[idx]["zone_name"]
+        var address2 = my_positions[idx]["address"]
         var custom_content = 
-        `<div class="acustomoverlay" onclick="Unity.call('${temp_name}');"><a><span class="title">${temp_name}</span></a></div>`;
+        `<div class="acustomoverlay" onclick="modal('${temp_name}', '${address2}');"><a><span class="title">${temp_name}</span></a></div>`;
         var two_place = my_positions[idx]["gps_place"].split(',');
         var qa = new kakao.maps.LatLng(parseFloat(two_place[0]), parseFloat(two_place[1]));
         var sd = my_positions[idx]["marker_img"]
         var mname = my_positions[idx]["zone_name"]
-        var address2 = my_positions[idx]["address"]
         var dc = {content:custom_content, temp_latlng:qa, marker_img:sd, name:mname, address:address2}
         positions.push(dc);
     }
@@ -275,8 +264,6 @@
             removable: true
         });
 
-        // kakao.maps.event.addListener(person_marker, 'click', makeOverListener(map, person_marker, infowindow));
-        // kakao.maps.event.addListener(infowindow, 'click', makeOutListener(infowindow));
         kakao.maps.event.addListener(map, 'zoom_changed', function() {   
 
             var latlng = map.getCenter();
@@ -299,8 +286,8 @@
         kakao.maps.event.addListener(person_marker, 'click', function(){
                 var address_name = "";
                 for (idx in positions){
-                    if(positions[i].name == person_marker.getTitle()){
-                        address_name = positions[i].address;
+                    if(positions[idx].name == person_marker.getTitle()){
+                        address_name = positions[idx].address;
                     }
                 }
                 modal(person_marker.getTitle(), address_name);
@@ -339,39 +326,21 @@
     });
 
 
-<!--    document.body.addEventListener('container', function(e) {-->
-<!--  if ( (e.touches.length > 1) || e.targetTouches.length > 1) {-->
-<!--    e.preventDefault();-->
-<!--    e.stopPropagation();-->
-<!--    e.stopImmediatePropagation();-->
-<!--  }-->
-<!--}, {passive: false});-->
-
-<!--$('#element').on('scroll touchmove mousewheel', function(event) {-->
-
-<!--event.preventDefault();-->
-<!--event.stopPropagation();-->
-<!--return false;-->
-
-<!--});-->
-
-$("#scroll").on('scroll touchmove mousewheel', function(event) {
-  event.preventDefault();
-  event.stopPropagation();
-  return false;
-});
-$("#side_menu").on('scroll touchmove mousewheel', function(event) {
-  event.preventDefault();
-  event.stopPropagation();
-  return false;
-});
-$("#popup").on('scroll touchmove mousewheel', function(event) {
-  event.preventDefault();
-  event.stopPropagation();
-  return false;
-});
-
-
+    $("#scroll").on('scroll touchmove mousewheel', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        return false;
+    });
+    $("#side_menu").on('scroll touchmove mousewheel', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        return false;
+    });
+    $("#popup").on('scroll touchmove mousewheel', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        return false;
+    });
 </script>
 
 </body>
