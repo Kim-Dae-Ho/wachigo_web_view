@@ -21,7 +21,7 @@
 
     </style>
 </head>
-<body class=".no-scroll">
+<body class=".no-scroll" id="no_modal_slide">
     <div>
         <div class="container">
             <div class="modal-btn-box">
@@ -56,7 +56,7 @@
           </div>
     </div>
 <nav>
-    <div class="menu-btn" onclick="side_button()">
+    <div class="menu-btn" onclick="side_button()" id="no_menu_btn">
 <!--        <div style="display:none" class="line line&#45;&#45;1"></div>-->
 <!--        <div style="display:none" class="line line&#45;&#45;2"></div>-->
 <!--        <div style="display:none" class="line line&#45;&#45;3"></div>-->
@@ -65,7 +65,7 @@
         <div class="line line--3"></div>
     </div>
 
-    <div class="nav-links">
+    <div class="nav-links" id="side_menu">
         <div class="my_blue">
 <!--            <a href="" class="my_link"><img src="./img/marker/Menuwhite.png" class="my_draw"> MENU</a>-->
             <a href="" class="my_link">MENU</a>
@@ -339,23 +339,33 @@
     });
 
 
-    document.body.addEventListener('container', function(e) {
-  if ( (e.touches.length > 1) || e.targetTouches.length > 1) {
-    e.preventDefault();
-    e.stopPropagation();
-    e.stopImmediatePropagation();
-  }
-}, {passive: false});
+<!--    document.body.addEventListener('container', function(e) {-->
+<!--  if ( (e.touches.length > 1) || e.targetTouches.length > 1) {-->
+<!--    e.preventDefault();-->
+<!--    e.stopPropagation();-->
+<!--    e.stopImmediatePropagation();-->
+<!--  }-->
+<!--}, {passive: false});-->
 
-$('#element').on('scroll touchmove mousewheel', function(event) {
+<!--$('#element').on('scroll touchmove mousewheel', function(event) {-->
 
-event.preventDefault();
-event.stopPropagation();
-return false;
+<!--event.preventDefault();-->
+<!--event.stopPropagation();-->
+<!--return false;-->
 
-});
+<!--});-->
 
 $("#scroll").on('scroll touchmove mousewheel', function(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  return false;
+});
+$("#side_menu").on('scroll touchmove mousewheel', function(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  return false;
+});
+$("#popup").on('scroll touchmove mousewheel', function(event) {
   event.preventDefault();
   event.stopPropagation();
   return false;
