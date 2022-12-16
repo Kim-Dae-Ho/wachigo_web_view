@@ -76,7 +76,7 @@
         <a href="" class="link"><img src="./img/marker/5.id.png" class="draw"> 아이디</a>
         <a href="" class="link"><img src="./img/marker/6.logout.png" class="draw"> 로그아웃</a>
         <a href="" class="link"><img src="./img/marker/7.version.png" class="draw"> 앱버전</a>
-        <a class="link" onclick="Unity.call('wangin')"><img src="./img/marker/7.version.png" class="draw"> 왕인박사 체험</a>
+        <a class="link" onclick="Unity.call('Wangin_Guide')"><img src="./img/marker/7.version.png" class="draw"> 왕인박사 체험</a>
     </div>
 </nav>
 
@@ -187,9 +187,9 @@
         setMarkers();
     }
 
-    kakao.maps.event.addListener(map, 'center_changed', function() {
-        setDraggable(false);
-    });
+    // kakao.maps.event.addListener(map, 'center_changed', function() {
+    //     setDraggable(false);
+    // });
 
     function setMarkers() {
         for (var i = 0; i < markers.length-1; i++) {
