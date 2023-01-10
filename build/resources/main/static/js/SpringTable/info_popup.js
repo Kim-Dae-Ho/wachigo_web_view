@@ -9,10 +9,13 @@
     $("#popup").css('display','flex').hide().fadeIn();
   });
 
-  function modal(title, address_name){
-    $("h1").text(title);
-    $("p").text(address_name);
-    $("#popup").css('display','flex').hide().fadeIn();
+  function modal(title, address_name, mini_menu){
+      if(mini_menu == "0"){
+          $("h1").text(title);
+          $("p").text(address_name);
+          $("#popup").css('display','flex').hide().fadeIn();
+      }
+
 
   }
 

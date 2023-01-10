@@ -18,6 +18,11 @@
         body.no-scroll {
             overflow: hidden !important
         }
+        .topright {
+          position: absolute;
+          right: 8px;
+          font-size: 20px;
+        }
 
     </style>
 </head>
@@ -41,18 +46,20 @@
                     </div>
                     <div class="body-contentbox">
                       <p id="sub_title">
-
                       </p>
                     </div>
                   </div>
                 </div>
                 <div class="popup-foot">
-                  <span class="pop-btn confirm" id="confirm" onclick="Unity.call('Wangin_Guide')">와치고 안내</span>
+                  <span class="pop-btn confirm" id="confirm" onclick="Unity.call('Wangin_Guide')">AR 가이드로 이동</span>
+                    <span class="pop-btn close" id="close">창 닫기</span>
                 </div>
               </div>
           </div>
           </div>
     </div>
+    <div id="mini_exit" class="topright" style="z-index: 2; display:none;" onclick="Unity.call('mini_exit')">X</div>
+    <div id="no_real_place" class="topright" style="z-index: 2; display:none; right: 0px; bottom: 0px;" onclick="mini_map_move()">O</div>
 <nav>
     <div class="menu-btn" onclick="side_button()" id="no_menu_btn">
 <!--        <div style="display:none" class="line line&#45;&#45;1"></div>-->
@@ -61,6 +68,7 @@
         <div class="line line--1"></div>
         <div class="line line--2"></div>
         <div class="line line--3"></div>
+
     </div>
 
     <div class="nav-links" id="side_menu">
@@ -74,13 +82,13 @@
         <a href="" class="link"><img src="./img/marker/3.use.png" class="draw"> 이용방법</a>
         <a href="" class="link"><img src="./img/marker/4.mobile.png" class="draw"> 고객센터</a>
         <a href="" class="link"><img src="./img/marker/5.id.png" class="draw"> 아이디</a>
-        <a href="" class="link"><img src="./img/marker/6.logout.png" class="draw"> 로그아웃</a>
+        <a href="" class="link" onclick="Unity.call('logout')"><img src="./img/marker/6.logout.png" class="draw"> 로그아웃</a>
         <a href="" class="link"><img src="./img/marker/7.version.png" class="draw"> 앱버전</a>
-        <a class="link" onclick="Unity.call('Wangin_Guide')"><img src="./img/marker/7.version.png" class="draw"> 왕인박사 체험</a>
+        <a class="link" onclick="Unity.call('Wangin_Guide')"><img src="./img/marker/7.version.png" class="draw"> AR 가이드 체험</a>
     </div>
 </nav>
 
-<div id="scroll" style="text-align: center">
+<div id="ar_munu_hide" style="text-align: center">
     <input type="hidden" id="latitude1" th:value="${latitude1}">
     <input type="hidden" id="longitude1" th:value="${longitude1}">
     <button style="width:70pt;height:30pt;" onclick="setDraggable(false)">현위치 끄기</button>
@@ -88,7 +96,7 @@
     <button style="width:70pt;height:30pt;" onclick="refresh()">새로고침</button>
     <button style="width:70pt;height:30pt;" onclick="side_button()">메뉴열기</button>
 </div>
-    <div id="map" style="width:100%;height:1000px;"></div>
+    <div id="map" style="width:100%;height:100%;"></div>
 
 <script src="/plugins/jquery/jquery.min.js"></script>
 <script src="/js/SpringTable/side_script.js"></script>
@@ -99,15 +107,33 @@
 <!--  <script src="/js/SpringTable/index.js"></script>-->
 <script th:inline="javascript">
 
-    function refresh(){
-        location.reload(true);
-    }
-
     var zoom_level = 0;
     var my_gps_result = true;
     var global_locPosition = null;
     var latitude1 = document.getElementById("latitude1").value;
     var longitude1 = document.getElementById("longitude1").value;
+
+    function refresh(){
+        location.reload(true);
+    }
+
+    var munu_hide_result = [[${ar_munu_hide_result}]];
+    var mini_menu = [[${mini_menu}]];
+
+    ar_munu_hide(munu_hide_result);
+
+    function ar_munu_hide(munu_hide_result){
+        if(munu_hide_result == "1"){
+            document.getElementById("ar_munu_hide").style.display="none";
+            document.getElementById("mini_exit").style.display="inline";
+            document.getElementById("no_real_place").style.display="inline";
+            my_gps_result = false
+            zoom_level = 4;
+            // document.getElementById("map").style.width="";
+            // document.getElementById("map").style.height="";
+        }
+    }
+
 
     // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
     var markers = [];
@@ -116,7 +142,7 @@
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
             center: new kakao.maps.LatLng(latitude1, longitude1), // 지도의 중심좌표
-            level: 0 // 지도의 확대 레벨
+            level: zoom_level // 지도의 확대 레벨
         };
 
     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -207,6 +233,16 @@
         }
     }
 
+    // 미니 웹뷰에서 지도 강제 이동을 막거나 풀고 싶을 때 사용한다.
+    function mini_map_move(){
+        if (my_gps_result == true){
+            my_gps_result = false
+        }
+        else if(my_gps_result == false){
+            my_gps_result = true
+        }
+    }
+
     // db에 가져온 좌표값을 콘솔로 표시해보기
 
     var my_positions = [[${abc}]];
@@ -289,7 +325,7 @@
                         address_name = positions[idx].address;
                     }
                 }
-                modal(person_marker.getTitle(), address_name);
+                modal(person_marker.getTitle(), address_name, mini_menu);
         });
 
         return person_marker;
@@ -340,6 +376,8 @@
         event.stopPropagation();
         return false;
     });
+
+
 </script>
 
 </body>

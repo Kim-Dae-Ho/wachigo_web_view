@@ -24,9 +24,13 @@ public class WachigoController {
     @GetMapping("/kakao")
     public Object kakaomap(Model model,
                            @RequestParam(required = false, defaultValue = "35.151497", value = "latitude") String latitude,
-                           @RequestParam(required = false, defaultValue = "126.888035", value = "longitude") String longitude){
+                           @RequestParam(required = false, defaultValue = "126.888035", value = "longitude") String longitude,
+                           @RequestParam(required = false, defaultValue= "0", value = "ar_munu_hide") String ar_munu_hide,
+                           @RequestParam(required = false, defaultValue = "0", value = "mini_menu")String mini_menu){
         model.addAttribute("latitude1",Float.parseFloat(latitude));
         model.addAttribute("longitude1",Float.parseFloat(longitude));
+        model.addAttribute("ar_munu_hide_result", ar_munu_hide);
+        model.addAttribute("mini_menu", mini_menu);
         System.out.println("위도값: " + latitude);
         System.out.println("경도값: " + longitude);
 
