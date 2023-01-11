@@ -8,6 +8,7 @@
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.min.css'>
     <link rel="stylesheet" href="/dist/css/side_style.css">
     <link rel="stylesheet" href="/dist/css/info_popup.css">
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
 
     <style>
         .acustomoverlay {position:relative;bottom:100px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
@@ -20,8 +21,7 @@
         }
         .topright {
           position: absolute;
-          right: 8px;
-          font-size: 20px;
+          right: 0px;
         }
 
     </style>
@@ -58,8 +58,8 @@
           </div>
           </div>
     </div>
-    <div id="mini_exit" class="topright" style="z-index: 2; display:none;" onclick="Unity.call('mini_exit')">X</div>
-    <div id="no_real_place" class="topright" style="z-index: 2; display:none; right: 0px; bottom: 0px;" onclick="mini_map_move()">O</div>
+    <div id="mini_exit" class="topright" style="z-index: 2; display:none;" onclick="Unity.call('mini_exit')"><i class="fas fa-times-circle"></i></div>
+    <div id="no_real_place" class="topright" style="z-index: 2; display:none; right: 0px; bottom: 0px;" onclick="mini_map_move()"><i class="fas fa-map-marker-alt"></i></div>
 <nav>
     <div class="menu-btn" onclick="side_button()" id="no_menu_btn">
 <!--        <div style="display:none" class="line line&#45;&#45;1"></div>-->
@@ -104,7 +104,6 @@
 
 <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4d4da419f788fe368fa0c7a6e8defeb5&libraries=clusterer"></script>
-<!--  <script src="/js/SpringTable/index.js"></script>-->
 <script th:inline="javascript">
 
     var zoom_level = 0;
@@ -213,9 +212,9 @@
         setMarkers();
     }
 
-    // kakao.maps.event.addListener(map, 'center_changed', function() {
-    //     setDraggable(false);
-    // });
+    kakao.maps.event.addListener(map, 'center_changed', function() {
+        setDraggable(false);
+    });
 
     function setMarkers() {
         for (var i = 0; i < markers.length-1; i++) {
